@@ -5,7 +5,8 @@ const port=8010;
 const imgPort=8011;
 //代理服务
 const apiServer=http.createServer((req,res)=>{
-    console.log("jjjj");
+    res.setHeader('Access-Control-Allow-Origin','*');
+    res.setHeader('Content-Type','text/plain;charset=UTF-8');
     if(req.url=='/themes'){
         let data={
             other:[{
@@ -15,8 +16,75 @@ const apiServer=http.createServer((req,res)=>{
                 description:"hhhhhhh"
             }]
         };
-        res.setHeader('Access-Control-Allow-Origin','*');
-        res.setHeader('Content-Type','text/plain;charset=UTF-8');
+
+        res.end(JSON.stringify(data));
+    }
+    if(req.url.startsWith("/theme/")){
+        let data={
+            stories:[{
+                type:0,
+                id:1111,
+                title:"文章列表list为数组，每一项的结构示例如下"
+            },
+            {
+                type:0,
+                id:2222,
+                title:"文章列表中的id字段是文章的id，请求文章内容和评论列表时会用到，title为标题，images为封面图片",
+            }
+        ]
+        }
+
+        res.end(JSON.stringify(data));
+    }
+    if(req.url.startsWith("/news/before/")){
+        let data={
+            date:20210312,
+            stories:[{
+                type:0,
+                id:1111,
+                title:"文章列表list为数组，每一项的结构示例如下"
+            },
+            {
+                type:0,
+                id:2222,
+                title:"文章列表中的id字段是文章的id，请求文章内容和评论列表时会用到，title为标题，images为封面图片",
+            },
+            {
+                type:0,
+                id:2222,
+                title:"文章列表中的id字段是文章的id，请求文章内容和评论列表时会用到，title为标题，images为封面图片",
+            },
+            {
+                type:0,
+                id:1111,
+                title:"文章列表list为数组，每一项的结构示例如下"
+            },
+            {
+                type:0,
+                id:2222,
+                title:"文章列表中的id字段是文章的id，请求文章内容和评论列表时会用到，title为标题，images为封面图片",
+            },{
+                type:0,
+                id:1111,
+                title:"文章列表list为数组，每一项的结构示例如下"
+            },
+            {
+                type:0,
+                id:2222,
+                title:"文章列表中的id字段是文章的id，请求文章内容和评论列表时会用到，title为标题，images为封面图片",
+            },
+            {
+                type:0,
+                id:1111,
+                title:"文章列表list为数组，每一项的结构示例如下"
+            },
+            {
+                type:0,
+                id:2222,
+                title:"文章列表中的id字段是文章的id，请求文章内容和评论列表时会用到，title为标题，images为封面图片",
+            },
+        ]
+        }
 
         res.end(JSON.stringify(data));
     }

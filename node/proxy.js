@@ -1,8 +1,11 @@
 const http=require("http");
 const request=require("request");
+var url = require("url");
+var queryString = require("querystring");
 const hostname='127.0.0.1';
 const port=8010;
 const imgPort=8011;
+const examPort=8081;
 //代理服务
 const apiServer=http.createServer((req,res)=>{
     res.setHeader('Access-Control-Allow-Origin','*');
@@ -123,3 +126,20 @@ const imgServer=http.createServer((req,res)=>{
 imgServer.listen(imgPort,hostname,()=>{
     console.log(`接口代理运行在：http://${hostname}:${imgPort}/`);
 })
+
+
+const examData=http.createServer((req,res)=>{
+    let arg=url.parse(req.url).query;
+    let params=queryString.parse(arg);
+    let l=req.url;
+    if(l.startsWith('/download'))
+    {
+        console.log(params);
+    }
+    res.setHeader('Access-Control-Allow-Origin','*');
+    res.setHeader('Content-Type','text/plain;charset=UTF-8');
+    res.end()
+});
+examData.listen(examPort,hostname,()=>{
+    console.log(`接口代理运行在：http://${hostname}:${examPort}/`)
+});
